@@ -95,4 +95,22 @@ let numIdenticalPairs2_1 = function (nums) {
   return counter;
 };
 
-console.log(numIdenticalPairs2_1([1, 2, 3, 1, 1, 3]));
+ // O(n) solution
+  let numIdenticalPairs2_2 = function (nums) {
+        const occurences = {}; // this is going to hold the number of the occurences for a given key, if the number is duplicated then the value will be incremented from 1 to 2 and so on.
+        let counter = 0; // This will be incremented only if the duplicate is found.
+
+        for (const number of nums) {
+          if (occurences[number]) { // if the key already exists
+            counter += occurences[number]; // then increase the counter by the value of the given key. Note that this is not an increment only but relies on the value of the key.
+            occurences[number] += 1; // then increase the value of the given key so that next time we use it above.
+          } else { // initalizes the object for a key and assign 1 to it which means we have one occurence of the key
+            occurences[number] = 1; // whenever the code reaches here, this will just create a property with the initial value of 1
+          }
+        }
+        console.log(occurences)
+        return counter;
+
+  };
+
+console.log(numIdenticalPairs2_2([1, 2, 3, 1, 1, 3]));
