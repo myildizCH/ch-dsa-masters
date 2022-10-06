@@ -4,6 +4,8 @@
  * @param {number[]} heights
  * @return {string[]}
  */
+
+// Sorting is not guaranteed this way
 var sortPeople = function (names, heights) {
   const people = {};
 
@@ -14,7 +16,7 @@ var sortPeople = function (names, heights) {
 
   // Objects provide keys in ascending order when keys are number
   // Assing the heights to names in opposite order to achive sorting
-  // Time complexity O(n) 
+  // Time complexity O(n)
   let i = names.length - 1;
   for (const key of Object.keys(people)) {
     names[i--] = people[key];
@@ -23,7 +25,26 @@ var sortPeople = function (names, heights) {
   return names;
 };
 
+// Bubble sort -> O(n^2) max
+var sortPeople1 = function (names, heights) {
+  for (let i = 0; i < names.length; i++) {
+    for (let j = 0; j < names.length; j++) {
+      if (heights[j + 1] > heights[j]) {
+        let tempName = names[j];
+        names[j] = names[j + 1];
+        names[j + 1] = tempName;
+
+        let tempHeight = heights[j];
+        heights[j] = heights[j + 1];
+        heights[j + 1] = tempHeight;
+      }
+    }
+  }
+
+  return names;
+};
+
 const names = ["Mary", "John", "Emma"],
   heights = [180, 165, 170];
 
-console.log(sortPeople(names, heights));
+console.log(sortPeople1(names, heights));
